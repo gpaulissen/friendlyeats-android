@@ -184,7 +184,34 @@ class MainFragment : Fragment(),
     }
 
     override fun onFilter(filters: Filters) {
-        // TODO(developer): Construct new query
+        // Construct query basic query
+        var query: Query = firestore.collection("restaurants")
+
+        // Category (equality filter)
+        if (filters.hasCategory()) {
+            query = query.whereEqualTo(Restaurant.FIELD_CATEGORY, filters.category)
+        }
+
+        // City (equality filter)
+        if (filters.hasCity()) {
+            query = query.whereEqualTo(Restaurant.FIELD_CITY, filters.city)
+        }
+
+        // Price (equality filter)
+        if (filters.hasPrice()) {
+            query = query.whereEqualTo(Restaurant.FIELD_PRICE, filters.price)
+        }
+
+        // Sort by (orderBy with direction)
+        if (filters.hasSortBy()) {
+            query = query.orderBy(filters.sortBy.toString(), filters.sortDirection)
+        }
+
+        // Limit items
+        query = query.limit(LIMIT.toLong())
+
+        // Update the query
+        adapter!!.setQuery(query)
 
         // Set header
         binding.textCurrentSearch.text = HtmlCompat.fromHtml(
