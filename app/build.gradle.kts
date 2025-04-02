@@ -3,6 +3,7 @@ plugins {
     id("kotlin-android")
     id("com.google.gms.google-services")
     id("androidx.navigation.safeargs")
+    id("com.google.firebase.appdistribution")
 }
 
 android {
@@ -22,6 +23,10 @@ android {
         getByName("release") {
             isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
+            firebaseAppDistribution {
+                releaseNotesFile="./releasenotes.txt"
+                testers="gert-jan.paulissen@t-hive.io"
+            }
         }
     }
     buildFeatures {

@@ -8,6 +8,7 @@ plugins {
     id("com.google.gms.google-services") version "4.4.2" apply false
     id("androidx.navigation.safeargs") version "2.8.9" apply false
     id("com.github.ben-manes.versions") version "0.52.0" apply true
+    id("com.google.firebase.appdistribution") version "5.1.1" apply false
 }
 
 allprojects {
